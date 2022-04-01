@@ -1,7 +1,16 @@
-import React from 'react'
+import { useParams, Navigate } from "react-router-dom";
+import { getHeroById } from "../../selectors/getHeroById";
 
 export const HeroScreen = () => {
-  return (
-    <h1>Hero</h1>
-  )
-}
+  const {heroId} = useParams();
+  const hero = getHeroById(heroId);
+  
+  if(!hero) {
+    return <Navigate to='/'/>
+    
+  }
+    
+  return <>
+    <h1>{hero.superhero}</h1>
+  </>
+};
