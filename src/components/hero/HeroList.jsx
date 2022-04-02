@@ -1,11 +1,13 @@
-import React from "react";
+import {useMemo} from "react";
 
 import { getHeroesByPublisher } from "../../selectors/getHerosByPublisher";
 import { HeroCard } from "./HeroCard";
 
 
 export const HeroList = ({ publisher }) => {
-  const heroes = getHeroesByPublisher(publisher);
+
+  const heroes = useMemo(() => getHeroesByPublisher(publisher), [publisher]);
+  
   return (
     <div className="">
       {heroes.map((hero) => {

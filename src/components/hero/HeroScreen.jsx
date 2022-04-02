@@ -1,12 +1,14 @@
 import { useParams, Navigate, useNavigate } from "react-router-dom";
 import { getImage } from "../../helpers/getImages";
 import { getHeroById } from "../../selectors/getHeroById";
+import { useMemo } from "react";
 
 export const HeroScreen = () => {
   const { heroId } = useParams();
   const navigate = useNavigate();
+  console.log(heroId, "Tenemos la dependencia que puede cambiar");
 
-  const hero = getHeroById(heroId);
+  const hero = useMemo(() => getHeroById(heroId), [heroId]);
   const handleBack = () => {
     navigate(-1);
   };
