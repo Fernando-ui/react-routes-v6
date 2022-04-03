@@ -1,8 +1,7 @@
-import React from 'react'
-import ReactDOM from 'react-dom'
-import  { HeroApp } from './HeroApp'
+import React from "react";
+import ReactDOM from "react-dom";
+import { HeroApp } from "./HeroApp";
 
 ReactDOM.render(
-    <HeroApp />,
-  document.getElementById('root')
-)
+    <HeroApp />, document.getElementById("root")
+);
