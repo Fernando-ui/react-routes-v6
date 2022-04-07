@@ -1,22 +1,32 @@
-import {useContext} from "react";
+import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../auth/authContext";
 import { ACTIONS } from "../../types/types";
 
-
-
 export const LoginScreen = () => {
-  const {dispatch} = useContext(AuthContext)
-  
+  const { dispatch } = useContext(AuthContext);
+
   const navigate = useNavigate();
 
   const handleLogin = () => {
-    console.log('Entrando al login');
+    const lastPath = localStorage.getItem("lastPath") || "/";
+
+    dispatch({ type: ACTIONS.LOGIN, payload: { name: "Fernando" } });
+    const lastSearch = localStorage.getItem("search");
+    console.log(lastSearch,'ultima busqueda');
     
-    dispatch({type:ACTIONS.LOGIN, payload:{name:'Fernando'}});
-    navigate('/marvel',{
-      replace:true
-    });
+    if (!lastSearch) {
+      console.log('pasando por el primero');
+      
+      navigate(lastPath, {
+        replace: true,
+      });
+      return;
+    } else {
+      console.log('pasando por el segundo');
+      navigate(`${lastPath}${lastSearch}`, { replace: true });
+      return;
+    }
   };
 
   return (
